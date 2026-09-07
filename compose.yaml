@@ -1,0 +1,28 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.api
+    environment:
+      MODEL_BUNDLE_PATH: /app/artifacts/releases/banking77
+      INFERENCE_API_KEY: ${INFERENCE_API_KEY:-local-dev-key-change-me}
+      METRICS_TOKEN: ${METRICS_TOKEN:-local-metrics-token-change-me}
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/ready', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  ui:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.ui
+    environment:
+      API_BASE_URL: http://api:8000
+      INFERENCE_API_KEY: ${INFERENCE_API_KEY:-local-dev-key-change-me}
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "8501:8501"

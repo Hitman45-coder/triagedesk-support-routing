@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: triagedesk-api
+    runtime: docker
+    dockerfilePath: ./deploy/Dockerfile.api
+    dockerContext: .
+    plan: free
+    healthCheckPath: /health/ready
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: ALLOWED_HOSTS
+        value: "*"
+      - key: MODEL_BUNDLE_PATH
+        value: /app/artifacts/releases/banking77
+      - key: INFERENCE_API_KEY
+        generateValue: true
+      - key: METRICS_TOKEN
+        generateValue: true
+
+  - type: web
+    name: triagedesk-ui
+    runtime: docker
+    dockerfilePath: ./deploy/Dockerfile.ui
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: API_BASE_URL
+        fromService:
+          type: web
+          name: triagedesk-api
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: INFERENCE_API_KEY
+        fromService:
+          type: web
+          name: triagedesk-api
+          envVarKey: INFERENCE_API_KEY
