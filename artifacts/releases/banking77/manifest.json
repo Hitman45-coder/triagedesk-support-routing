@@ -1,0 +1,28 @@
+{
+  "artifact_schema_version": "1.0",
+  "model_version": "banking77-0.1.0",
+  "policy_version": "policy-0.1.0",
+  "label_count": 77,
+  "metrics": {
+    "scope": "banking77-test",
+    "dataset_commit": "57ec275d8078af65b7731c2a98be812d844a6d6b",
+    "accuracy": 0.8951298701298701,
+    "macro_f1": 0.8942422164541391,
+    "train_rows": 10003,
+    "train_rows_after_test_duplicate_removal": 9996,
+    "fit_rows": 6997,
+    "calibration_rows": 1499,
+    "policy_rows": 1500,
+    "test_rows": 3080,
+    "normalized_train_test_duplicates": 7,
+    "policy_validation_candidates": 45,
+    "test_automatic_coverage": 0.7724025974025974,
+    "test_selective_accuracy": 0.9604875998318622,
+    "test_automatic_count": 2379,
+    "label_count": 77
+  },
+  "scope": "banking77",
+  "confidence_threshold": 0.45,
+  "margin_threshold": 0.05,
+  "automation_enabled": true
+}
