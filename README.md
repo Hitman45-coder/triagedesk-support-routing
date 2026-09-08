@@ -4,6 +4,14 @@ TriageDesk is a small, production-engineered support-message intent classifier. 
 
 The repository includes the evaluated 77-intent release artifact, typed FastAPI contracts, a Streamlit client, bounded batch processing, deployment configuration, and tests. The implementation is designed as a low-traffic portfolio service: uncertain or policy-sensitive requests remain explicitly reviewable.
 
+## Live deployment
+
+- **Try the Streamlit workbench:** https://triagedesk-ui.onrender.com
+- **FastAPI readiness:** https://triagedesk-api-fn3x.onrender.com/health/ready
+- **Repository:** https://github.com/Hitman45-coder/triagedesk-support-routing
+
+The public release runs on Render's free profile. It can sleep after inactivity, so the first request after a quiet period may take longer. The model bundle is included in the API image; user messages are held only in the Streamlit session and are not stored by the API.
+
 ## Quick start
 
 ```bash
